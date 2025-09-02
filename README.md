@@ -8,8 +8,8 @@ Welcome! Use this repo as the starting point for your submission to the **Studyf
 
 ## Getting started
 
-* **pnpm** installed
-* Gemini API key (provided as part of the challenge)
+- **pnpm** installed
+- Gemini API key (provided as part of the challenge)
 
 Create `.env.local` in the project root:
 
@@ -19,46 +19,47 @@ GOOGLE_GENERATIVE_AI_API_KEY=provided_key_here
 
 ---
 
-## Running in Expo 
+## Running in Expo
 
 1. Install deps:
 
    ```bash
    pnpm install
    ```
+
 2. Start the dev server:
 
    ```bash
    npx expo
    ```
+
 3. Open the app:
-
-   * **iOS Simulator:** press `i` in the terminal.
-   * **Real device:** install **Expo Go**, scan the QR code.
-
+   - **iOS Simulator:** press `i` in the terminal.
+   - **Real device:** install **Expo Go**, scan the QR code.
 
 ---
 
 ## Key files to work on
 
-* **Primary (chat UI):** `app/(tabs)/index.tsx`
-  *This is the main file to implement your chat experience.*
-* **API route (streaming/tools example):** `app/api/chat+api.ts`
+- **Primary (chat UI):** `app/(tabs)/index.tsx`
+  _This is the main file to implement your chat experience._
+- **API route (streaming/tools example):** `app/api/chat+api.ts`
+
 ---
 
 ## Development build (optional)
 
 If you need more than Expo Go (e.g., native modules or a custom dev client):
 
-* Use the prepared branch:
+- Use the prepared branch:
 
   ```bash
   git checkout native-development-build
   ```
-* Or create your own dev client:
+
+- Or create your own dev client:
 
   ```bash
-  pnpm expo run:ios  
-  pnpm expo start 
+  pnpm expo run:ios
+  pnpm expo start
   ```
-

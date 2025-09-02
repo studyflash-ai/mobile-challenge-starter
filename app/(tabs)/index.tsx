@@ -1,42 +1,42 @@
-import { generateAPIUrl } from "@/utils";
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
-import { fetch as expoFetch } from "expo/fetch";
-import { useState } from "react";
-import { View, TextInput, ScrollView, Text, SafeAreaView } from "react-native";
+import { generateAPIUrl } from '@/utils';
+import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport } from 'ai';
+import { fetch as expoFetch } from 'expo/fetch';
+import { useState } from 'react';
+import { View, TextInput, ScrollView, Text, SafeAreaView } from 'react-native';
 
 export default function App() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const { messages, error, sendMessage } = useChat({
     transport: new DefaultChatTransport({
       fetch: expoFetch as unknown as typeof globalThis.fetch,
-      api: generateAPIUrl("/api/chat"),
+      api: generateAPIUrl('/api/chat'),
     }),
-    onError: (error) => console.error(error, "ERROR"),
+    onError: error => console.error(error, 'ERROR'),
   });
 
   if (error) return <Text>{error.message}</Text>;
 
   return (
-    <SafeAreaView style={{ height: "100%" }}>
+    <SafeAreaView style={{ height: '100%' }}>
       <View
         style={{
-          height: "95%",
-          display: "flex",
-          flexDirection: "column",
+          height: '95%',
+          display: 'flex',
+          flexDirection: 'column',
           paddingHorizontal: 8,
         }}
       >
         <ScrollView style={{ flex: 1 }}>
-          {messages.map((m) => (
+          {messages.map(m => (
             <View key={m.id} style={{ marginVertical: 8 }}>
               <View>
                 <Text style={{ fontWeight: 700 }}>{m.role}</Text>
                 {m.parts.map((part, i) => {
                   switch (part.type) {
-                    case "text":
+                    case 'text':
                       return <Text key={`${m.id}-${i}`}>{part.text}</Text>;
-                    case "tool-weather":
+                    case 'tool-weather':
                       return (
                         <Text key={`${m.id}-${i}`}>
                           {JSON.stringify(part, null, 2)}
@@ -50,14 +50,14 @@ export default function App() {
         </ScrollView>
         <View style={{ marginTop: 8 }}>
           <TextInput
-            style={{ backgroundColor: "white", padding: 8 }}
+            style={{ backgroundColor: 'white', padding: 8 }}
             placeholder="Say something..."
             value={input}
-            onChange={(e) => setInput(e.nativeEvent.text)}
-            onSubmitEditing={(e) => {
+            onChange={e => setInput(e.nativeEvent.text)}
+            onSubmitEditing={e => {
               e.preventDefault();
               sendMessage({ text: input });
-              setInput("");
+              setInput('');
             }}
             autoFocus={true}
           />
