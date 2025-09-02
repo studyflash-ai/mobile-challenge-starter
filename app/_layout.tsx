@@ -1,22 +1,19 @@
+import '@/polyfills';
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from '@react-navigation/native';
-import '@/polyfills';
-
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { useCustomFonts } from '@/hooks/useFonts';
+import HomeScreen from './HomeScreen';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+  const { loaded } = useCustomFonts();
 
   if (!loaded) {
     // Async font loading only occurs in development.
@@ -25,10 +22,7 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
+      <HomeScreen />
       <StatusBar style="auto" />
     </ThemeProvider>
   );
